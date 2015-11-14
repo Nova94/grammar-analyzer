@@ -1,0 +1,10 @@
+{
+    "terminals": ["a", "b"],
+    "start":"S",
+    "rules": [
+        {
+            "var":"S",
+            "rule": ["aSb", "#"]
+        }
+    ]
+}
