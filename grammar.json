@@ -1,10 +1,14 @@
 {
-    "terminals": ["a", "b"],
+    "terminals": ["a", "b", "#"],
     "start":"S",
     "rules": [
         {
             "var":"S",
-            "rule": ["aSb", "#"]
+            "derives": "aSb"
+        },
+        {
+            "var":"S",
+            "derives": "#"
         }
     ]
 }

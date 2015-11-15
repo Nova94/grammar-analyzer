@@ -24,14 +24,10 @@
 # 5. [b], [b]
 # 6. [], []
 
-#TODO: Read grammar from file
-#TODO: Read in String from user
-#TODO: Push start variable onto stack
-#TODO: If var, then peek() -> rule, push right hand side onto the stack. else reject
-#TODO: if term, then peek() && match, remove both else reject
-#TODO: if stack empty && input buffer empty, then accept else reject
+import unittest
+import json
+import sys
 
-import unittest, json
 
 
 class GrammarAnalyzer:
