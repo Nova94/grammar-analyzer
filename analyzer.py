@@ -13,6 +13,14 @@ def main():
     print(analyzer.analyze())
 
 
+class NoRuleFound(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
+
+
 class GrammarAnalyzer:
     def __init__(self, grammar_file):
         self.input_buffer = []

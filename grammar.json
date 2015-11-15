@@ -4,10 +4,14 @@
     "rules": [
         {
             "var":"S",
-            "derives": "aSb"
+            "derives": "aTb"
         },
         {
-            "var":"S",
+            "var":"T",
+            "derives": "aTb"
+        },
+        {
+            "var":"T",
             "derives": "#"
         }
     ]
