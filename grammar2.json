@@ -1,0 +1,18 @@
+{
+    "terminals": ["0", "1", "#"],
+    "start":"S",
+    "rules": [
+        {
+            "var":"S",
+            "derives": "0S0"
+        },
+        {
+            "var":"S",
+            "derives": "1S1"
+        },
+        {
+            "var":"S",
+            "derives": "#"
+        }
+    ]
+}
