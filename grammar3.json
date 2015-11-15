@@ -24,10 +24,6 @@
         },
         {
             "var":"A",
-            "derives": "F"
-        },
-        {
-            "var":"F",
             "derives": "#"
         }
     ]
