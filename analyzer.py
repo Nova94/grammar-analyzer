@@ -1,6 +1,20 @@
-# author : Lisa gray
-# date : Nov 14th 2015
-# grammar analyzer with TDD.
+#!/usr/bin/env python3
+"""
+A simple grammar analyzer - trying out test driven development
+
+There are two main criteria the grammars need to have.
+
+    1. All rules in the grammar must have a terminal as the first symbol on the right hand side of
+the rule.
+
+    2. No variable in the grammar can have two rules with the same terminal as the first symbol on
+the right hand side.
+
+"""
+__author__ = "Lisa Gray"
+__date__ = "Nov 14th 2015"
+__version__ = 1.0
+__license__ = "MIT"
 
 import json
 

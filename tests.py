@@ -1,4 +1,11 @@
 #!/user/bin/env python3
+"""
+ unit tests for GrammarAnalyzer
+"""
+__author__ = "Lisa Gray"
+__date__ = "Nov 14th 2015"
+__version__ = 1.0
+__license__ = "MIT"
 
 import unittest
 from analyzer import GrammarAnalyzer
