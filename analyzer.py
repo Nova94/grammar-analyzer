@@ -147,11 +147,15 @@ class GrammarTestCase(unittest.TestCase):
         self.assertEqual("reject", self.analyzer.analyze())
 
     def test_analyze_reject2(self):
-        self.analyzer.input_buffer = "#b"
+        self.analyzer.input_buffer = "#"
         self.assertEqual("reject", self.analyzer.analyze())
 
     def test_analyze_reject3(self):
         self.analyzer.input_buffer = "aa#cb"
+        self.assertEqual("reject", self.analyzer.analyze())
+
+    def test_analyze_reject4(self):
+        self.analyzer.input_buffer = "aa#cc"
         self.assertEqual("reject", self.analyzer.analyze())
 
     def test_analyze_grammar2_accept(self):

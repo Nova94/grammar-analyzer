@@ -16,11 +16,15 @@
         },
         {
             "var":"X",
-            "derives": "#F"
+            "derives": "#A"
         },
         {
-            "var":"F",
-            "derives": "cF"
+            "var":"A",
+            "derives": "cA"
+        },
+        {
+            "var":"A",
+            "derives": "F"
         },
         {
             "var":"F",
