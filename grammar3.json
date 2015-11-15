@@ -4,7 +4,7 @@
     "rules": [
         {
             "var":"T",
-            "derives": "SX"
+            "derives": "aSbX"
         },
         {
             "var":"S",
