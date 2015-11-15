@@ -147,6 +147,29 @@ class GrammarTestCase(unittest.TestCase):
         self.analyzer.input_buffer = "aa#cb"
         self.assertEqual("reject", self.analyzer.analyze())
 
+    def test_analyze_grammar2_accept(self):
+        self.analyzer = GrammarAnalyzer("grammar2.json")
+        self.analyzer.input_buffer = "0101101010#0101011010"
+        self.assertEqual("accept", self.analyzer.analyze())
+        pass
+
+    def test_analyze_grammar2_reject(self):
+        self.analyzer = GrammarAnalyzer("grammar2.json")
+        self.analyzer.input_buffer = "0101101010#0101101010"
+        self.assertEqual("reject", self.analyzer.analyze())
+        pass
+
+    def test_analyze_grammar3_accept(self):
+        self.analyzer = GrammarAnalyzer("grammar3.json")
+        self.analyzer.input_buffer = "0101101010#0101011010"
+        self.assertEqual("accept", self.analyzer.analyze())
+        pass
+
+    def test_analyze_grammar3_reject(self):
+        self.analyzer = GrammarAnalyzer("grammar3.json")
+        self.analyzer.input_buffer = "0101101010#0101101010"
+        self.assertEqual("reject", self.analyzer.analyze())
+        pass
 
 if __name__ == '__main__':
     main()
