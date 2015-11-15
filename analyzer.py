@@ -48,7 +48,7 @@ class GrammarAnalyzer:
     # push rule onto the stack
     def push(self, rule):
         if rule is None:
-            sys.exit('rejected : no rule found!')
+            sys.exit('reject')
         else:
             # push rule to stack (needs to be reversely appended "aSb" -> ["b","S","a"])
             for i in rule[::-1]:
@@ -57,8 +57,9 @@ class GrammarAnalyzer:
     # derive the rule from variable found and peeked character
     def derive(self, variable, peek):
         for i in self.json["rules"]:  # check all rules
-            if variable == i["var"] and i["derives"][0] == peek:  # if rule exists
+            if variable == i["var"] and (self.is_variable(i["derives"][0]) or i["derives"][0] == peek):  # if rule exists
                 return i["derives"]  # return the rule
+
         return None  # otherwise, return None
 
     # is the character a variable?
@@ -151,25 +152,31 @@ class GrammarTestCase(unittest.TestCase):
         self.analyzer = GrammarAnalyzer("grammar2.json")
         self.analyzer.input_buffer = "0101101010#0101011010"
         self.assertEqual("accept", self.analyzer.analyze())
-        pass
 
     def test_analyze_grammar2_reject(self):
         self.analyzer = GrammarAnalyzer("grammar2.json")
         self.analyzer.input_buffer = "0101101010#0101101010"
         self.assertEqual("reject", self.analyzer.analyze())
-        pass
 
     def test_analyze_grammar3_accept(self):
         self.analyzer = GrammarAnalyzer("grammar3.json")
-        self.analyzer.input_buffer = "0101101010#0101011010"
+        self.analyzer.input_buffer = "aa#bb#c#"
         self.assertEqual("accept", self.analyzer.analyze())
-        pass
+
+    def test_analyze_grammar3_accept2(self):
+        self.analyzer = GrammarAnalyzer("grammar3.json")
+        self.analyzer.input_buffer = "aaaaa#bbbbb#ccccccccccccccc#"
+        self.assertEqual("accept", self.analyzer.analyze())
+
+    def test_analyze_grammar3_accept3(self):
+        self.analyzer = GrammarAnalyzer("grammar3.json")
+        self.analyzer.input_buffer = "aaaaaaaaaaaaaa#bbbbbbbbbbbbbb#c#"
+        self.assertEqual("accept", self.analyzer.analyze())
 
     def test_analyze_grammar3_reject(self):
         self.analyzer = GrammarAnalyzer("grammar3.json")
-        self.analyzer.input_buffer = "0101101010#0101101010"
+        self.analyzer.input_buffer = "a##c#"
         self.assertEqual("reject", self.analyzer.analyze())
-        pass
 
 if __name__ == '__main__':
     main()

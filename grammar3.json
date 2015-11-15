@@ -1,0 +1,30 @@
+{
+    "terminals": ["a", "b", "c", "#"],
+    "start":"T",
+    "rules": [
+        {
+            "var":"T",
+            "derives": "SX"
+        },
+        {
+            "var":"S",
+            "derives":"aSb"
+        },
+        {
+            "var":"S",
+            "derives":"#"
+        },
+        {
+            "var":"X",
+            "derives": "#F"
+        },
+        {
+            "var":"F",
+            "derives": "cF"
+        },
+        {
+            "var":"F",
+            "derives": "#"
+        }
+    ]
+}
