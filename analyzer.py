@@ -2,28 +2,6 @@
 # date : Nov 14th 2015
 # grammar analyzer with TDD.
 
-# stack and input buffer
-
-# {
-#    "terminals": ["a", "b"]
-#    "start":"S"
-#    "rules": [
-#     {
-#        "var": "S"
-#        "deriv":["aSb", "#"]
-#     },
-#    ]
-# }
-
-#  a#b
-
-# 1. [S], [a,#,b]
-# 2. [a,S,b],[a,#,b]
-# 3. [S, b], [#,b]
-# 4. [#, b], [#,b]
-# 5. [b], [b]
-# 6. [], []
-
 import unittest
 import json
 import sys
@@ -33,6 +11,7 @@ def main():
     analyzer = GrammarAnalyzer("grammar.json")
     analyzer.read_input()
     print(analyzer.analyze())
+
 
 class GrammarAnalyzer:
     def __init__(self, grammar_file):
@@ -162,6 +141,7 @@ class GrammarTestCase(unittest.TestCase):
     def test_analyze_reject2(self):
         self.analyzer.input_buffer = "#b"
         self.assertEqual("reject", self.analyzer.analyze())
+
 
 if __name__ == '__main__':
     main()
