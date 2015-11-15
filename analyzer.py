@@ -125,6 +125,7 @@ class GrammarTestCase(unittest.TestCase):
     def test_derive_rule(self):
         self.assertEqual(self.analyzer.derive("S", "a"), "aSb")
         self.assertEqual(self.analyzer.derive("S", "#"), "#")
+        self.assertEqual(self.analyzer.derive("Y", "x"), None)
 
     def test_analyze_accept(self):
         self.analyzer.input_buffer = "aa#bb"
@@ -140,6 +141,10 @@ class GrammarTestCase(unittest.TestCase):
 
     def test_analyze_reject2(self):
         self.analyzer.input_buffer = "#b"
+        self.assertEqual("reject", self.analyzer.analyze())
+
+    def test_analyze_reject3(self):
+        self.analyzer.input_buffer = "aa#cb"
         self.assertEqual("reject", self.analyzer.analyze())
 
 
