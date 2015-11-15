@@ -4,7 +4,6 @@
 
 import unittest
 import json
-import sys
 
 
 def main():
@@ -41,8 +40,11 @@ class GrammarAnalyzer:
 
         # if is_var, then peek() -> rule, push right hand side onto the stack. else reject
         if self.is_variable(check):
-            self.push(self.derive(check, self.input_buffer[0]))
-            return self.analyze()  # continue
+            try:
+                self.push(self.derive(check, self.input_buffer[0]))
+                return self.analyze()  # continue
+            except NoRuleFound:
+                return 'reject'
         # elif is_term, then if peek() == match, remove from input_buffer else reject
         elif self.is_terminal(check):
             if check == self.input_buffer[0]:
@@ -56,7 +58,7 @@ class GrammarAnalyzer:
     # push rule onto the stack
     def push(self, rule):
         if rule is None:
-            sys.exit('reject')
+            raise NoRuleFound('reject: no rule found')
         else:
             # push rule to stack (needs to be reversely appended "aSb" -> ["b","S","a"])
             for i in rule[::-1]:
@@ -88,10 +90,6 @@ class GrammarAnalyzer:
         # if stack and input buffer are empty, then return 'accept' else return 'reject'
         if self.stack == [] and self.input_buffer == '':
             return "accept"
-        elif self.stack != [] and self.input_buffer == '':
-            return "reject"
-        elif self.stack == [] and self.input_buffer != '':
-            return "reject"
         else:
             return "reject"
 
@@ -110,7 +108,7 @@ class GrammarTestCase(unittest.TestCase):
     def test_first_grammar_fields(self):
         self.assertEqual(self.analyzer.json["terminals"], ["a", "b", "#"])
         self.assertEqual(self.analyzer.json["start"], "S")
-        self.assertEqual(self.analyzer.json["rules"][0], {'var': 'S', 'derives': "aSb"})
+        self.assertEqual(self.analyzer.json["rules"][0], {'var': 'S', 'derives': "aTb"})
 
     def test_isVariable(self):
         self.analyzer.stack.append("S")
@@ -132,8 +130,8 @@ class GrammarTestCase(unittest.TestCase):
         self.assertEqual('accept', self.analyzer.is_accepted())
 
     def test_derive_rule(self):
-        self.assertEqual(self.analyzer.derive("S", "a"), "aSb")
-        self.assertEqual(self.analyzer.derive("S", "#"), "#")
+        self.assertEqual(self.analyzer.derive("S", "a"), "aTb")
+        self.assertEqual(self.analyzer.derive("T", "#"), "#")
         self.assertEqual(self.analyzer.derive("Y", "x"), None)
 
     def test_analyze_accept(self):
