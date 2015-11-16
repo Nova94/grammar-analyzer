@@ -80,7 +80,8 @@ class GrammarAnalyzer:
     # derive the rule from variable found and peeked character
     def derive(self, variable, peek):
         for i in self.json["rules"]:  # check all rules
-            if variable == i["var"] and (self.is_variable(i["derives"][0]) or i["derives"][0] == peek):  # if rule exists
+            # if rule exists
+            if variable == i["var"] and (self.is_variable(i["derives"][0]) or i["derives"][0] == peek):
                 return i["derives"]  # return the rule
 
         return None  # otherwise, return None
