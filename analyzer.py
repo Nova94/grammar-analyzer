@@ -49,18 +49,18 @@ class GrammarAnalyzer:
             return self.is_accepted()
 
         # pop off stack
-        check = self.stack.pop()
+        top = self.stack.pop()
 
         # if is_var, then peek() -> rule, push right hand side onto the stack. else reject
-        if self.is_variable(check):
+        if self.is_variable(top):
             try:
-                self.push(self.derive(check, self.input_buffer[0]))
+                self.push(self.derive(top, self.input_buffer[0]))
                 return self.analyze()  # continue
             except NoRuleFound:
                 return 'reject'
         # elif is_term, then if peek() == match, remove from input_buffer else reject
-        elif self.is_terminal(check):
-            if check == self.input_buffer[0]:
+        elif self.is_terminal(top):
+            if top == self.input_buffer[0]:
                 self.input_buffer = self.input_buffer[1:]  # 'pop' off input_buffer
                 return self.analyze()  # continue
             else:
