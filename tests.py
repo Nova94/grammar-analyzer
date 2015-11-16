@@ -71,6 +71,10 @@ class GrammarTestCase(unittest.TestCase):
         self.analyzer.input_buffer = "#"
         self.assertEqual("reject", self.analyzer.analyze())
 
+    def test_should_reject_grammar1_invalid_char(self):
+        self.analyzer.input_buffer = "aa$bb"
+        self.assertEqual("reject", self.analyzer.analyze())
+
     def test_should_reject_grammar1_no_match_on_terminal(self):
         self.analyzer.input_buffer = "aa#cb"
         self.assertEqual("reject", self.analyzer.analyze())
