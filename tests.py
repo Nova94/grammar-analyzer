@@ -8,6 +8,7 @@ __version__ = 1.0
 __license__ = "MIT"
 
 import unittest
+
 from analyzer import GrammarAnalyzer
 
 

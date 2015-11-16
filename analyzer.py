@@ -107,5 +107,6 @@ class GrammarAnalyzer:
         else:
             return "reject"
 
+
 if __name__ == '__main__':
     main()
