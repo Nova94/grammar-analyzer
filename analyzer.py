@@ -16,11 +16,24 @@ __date__ = "Nov 14th 2015"
 __version__ = 1.0
 __license__ = "MIT"
 
+import sys
 import json
+import getopt
 
 
-def main():
-    analyzer = GrammarAnalyzer("grammar.json")
+def main(argv):
+    input_file = ''
+    try:
+        opts, args = getopt.getopt(argv, 'f:', ['file='])
+    except getopt.GetoptError:
+        print 'analyzer.py -f <grammar_json>'
+        sys.exit(2)
+
+    for opt, arg in opts:
+        if opt in ('-f', '--file'):
+            input_file = arg
+
+    analyzer = GrammarAnalyzer(input_file)
     analyzer.read_input()
     print(analyzer.analyze())
 
@@ -36,8 +49,13 @@ class NoRuleFound(Exception):
 class GrammarAnalyzer:
     def __init__(self, grammar_file):
         self.input_buffer = []
-        with open(grammar_file) as json_file:
-            self.json = json.load(json_file)
+        try:
+            with open(grammar_file) as json_file:
+                self.json = json.load(json_file)
+        except IOError:
+            print('File not found!')
+            sys.exit(2)
+
         self.stack = [self.json["start"]]
 
     def read_input(self):
@@ -109,4 +127,4 @@ class GrammarAnalyzer:
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])
