@@ -26,7 +26,7 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv, 'f:', ['file='])
     except getopt.GetoptError:
-        print 'analyzer.py -f <grammar_json>'
+        print('analyzer.py -f <grammar_json>')
         sys.exit(2)
 
     for opt, arg in opts:
@@ -59,7 +59,7 @@ class GrammarAnalyzer:
         self.stack = [self.json["start"]]
 
     def read_input(self):
-        self.input_buffer = raw_input("Enter String:")
+        self.input_buffer = input("Enter String:")
 
     def analyze(self):
         # if stack or input_buffer is empty; then return accept or reject
